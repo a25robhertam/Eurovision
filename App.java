@@ -1,4 +1,3 @@
-
 /*====================================================================
 LISTA DE PAISES QUE PARTICIPAN EN EUROVISION 
 ===========================================================
@@ -34,17 +33,14 @@ Austria
 */
 
 
-import java.io.StringReader;
-import java.util.Scanner;
-
+import java.lang.Math;
 
 
 //=============================================
 /*creamos la clase paises */
 class Paises{
-    String varNombrePais;
+    String varNombrePais = "";
     int varPuntosObtenidos = 0 ;
-    int varNumIdentificador = 0;
 }
 /*fin de la creacion de paises */
 //=============================================
@@ -71,9 +67,9 @@ public class App {
     
     */
 
-    public static String asignacionPaisesNumeros(Integer varPosicionRandom ) {
+    public static String asignacionPaisesNumeros(int varPosicionRandom ) {
 
-        String varNombre;
+        String varNombre = "" ;
 
         switch (varPosicionRandom) {
             case 0:  varNombre = "Suecia"; break;
@@ -118,14 +114,14 @@ public class App {
        FUNCION RELLENAR NOMBTE DE PAISES    */
 
     public static String posicionesNombresAutomaticas( ){
-
+        
         boolean varAux = false;
-        String varNombre ;
-        Integer varPosicionRandom = null ;
+        String varNombre = "" ;
+        int varPosicionRandom = 0 ;
 
         while (varAux == false){
             varPosicionRandom = (int) (Math.random()*   NUM_PAISES);
-             if ( pais[varPosicionRandom].varNombrePais == null){
+             if ( pais[varPosicionRandom].varNombrePais == "") {
                 varAux = true;
              }
              varNombre = asignacionPaisesNumeros(varPosicionRandom);
@@ -146,13 +142,17 @@ public class App {
 
 
     
-    public static void main(String[] args) throws Exception {
-
+    public static void main (String[] args) {
         
-     
+
+    for (int i = 0; i < NUM_PAISES; i++) {
+       pais[i] = new Paises();
+}
+
+
+
         for (int i = 0; i < NUM_PAISES; i ++ ){
             pais[i].varNombrePais = posicionesNombresAutomaticas();
-
         }
 
        for (int i = 0; i < NUM_PAISES; i ++ ){
