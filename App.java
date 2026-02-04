@@ -40,21 +40,111 @@ import java.lang.Math;
 /*creamos la clase paises */
 class Paises{
     String varNombrePais = "";
-    int varPuntosObtenidos = 0 ;
+    int varPuntosPaises = 0 ;
+    int varAux = 0;
+    int varPosiciones = 0;
 }
 /*fin de la creacion de paises */
 //=============================================
 
 
 
-
+/* -------------------------------------------------------------------------------*/
 public class App {
 
+    static final int NUM_BOTACIONES = 10 ;
+    static final int NUM_PAISES = 26;/*26 PAISES PARTICIPANTES */
+    static Paises[] pais = new Paises[NUM_PAISES];
+/* -------------------------------------------------------------------------------*/
 
-        static final int NUM_PAISES = 26;/*26 PAISES PARTICIPANTES */
-        static Paises[] pais = new Paises[NUM_PAISES];
 
 
+
+
+ /*==========================================================================================================
+       FUNCION ASIGNACION NUMEROS
+    
+       le asignammos a cada pais un numero identificador a cada cual se le asigna un nombre y con el que podremso identificaro
+    
+    */
+
+
+    public static int distincionDePuntuacion (int varPosicionRandom, int j) {
+
+        int varPuntos[] = new int [NUM_BOTACIONES] ;
+        for (int i = j ;i < NUM_BOTACIONES - 2 ; i ++){
+            varPuntos[i] = i + 1 ;
+
+        }
+        varPuntos [8] = 10;
+        varPuntos [9] = 12;
+
+
+        return varPuntos [varPosicionRandom];
+    }
+
+
+
+
+
+
+/*======================================================================================================== */
+
+
+
+
+
+ /*==========================================================================================================
+       FUNCION ASIGNACION PUNTOS A PAIESES ALAZAR
+    
+    
+       le asignammos a cada pais un numero identificador a cada cual se le asigna un nombre y con el que podremso identificaro
+    
+    */
+
+
+    public static void agregarPuntuacion () {
+
+
+
+        boolean varAux = false;
+        int varPosicionRandom = 0 ;
+
+
+
+     
+
+
+
+            for (int j = 0 ; j < NUM_BOTACIONES ; j++){
+                
+                while (varAux == false){
+                    varPosicionRandom = (int) (Math.random()*   NUM_BOTACIONES);
+                    if ( pais[varPosicionRandom].varAux == 0) {
+                        varAux = true;
+                    }
+          
+                }
+                    pais[varPosicionRandom].varPuntosPaises =  distincionDePuntuacion(varPosicionRandom,j) + pais[varPosicionRandom].varPuntosPaises;
+                    pais[varPosicionRandom].varAux = 1;
+            }
+
+
+            
+            for (int j = 0 ; j < NUM_BOTACIONES; j++){
+                pais[j].varAux = 0 ;
+            }
+
+
+
+    }
+
+
+
+
+
+
+/*======================================================================================================== */
 
 
 
@@ -132,11 +222,34 @@ public class App {
 
 
 
-        return varNombre;
+        return varNombre;/*DEVUELVE EL NOMBRE DE 1 DE LOS PAISES PARTICIPANTES */
     }
 
     /*  FINAL FUNCION PUNTOS  
     ==========================================================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -146,18 +259,42 @@ public class App {
         
 
     for (int i = 0; i < NUM_PAISES; i++) {
-       pais[i] = new Paises();
+       pais[i] = new Paises();/*CREA LOS DIFERENTES VECTORES PARA UQE EL BALOR NO SEA NULO  */
 }
 
 
 
         for (int i = 0; i < NUM_PAISES; i ++ ){
             pais[i].varNombrePais = posicionesNombresAutomaticas();
+            pais[i].varPosiciones = i ;
         }
 
+
+
+
+
+
+
+        /*IMPRIME LOS PAISES PAR ACOMPROBAR SI FUNCIONA O NO 
        for (int i = 0; i < NUM_PAISES; i ++ ){
             System.out.printf("%s \n", pais[i].varNombrePais);
                }
+        */
+
+
+               for (int i = 0 ; i < NUM_PAISES; i++){
+
+                agregarPuntuacion();
+
+               }
+
+
+       
+       for (int i = 0; i < NUM_PAISES; i ++ ){
+            System.out.printf("%s %s \n", pais[i].varNombrePais, pais[i].varPuntosPaises);
+               }
+        
+
 
 
     }
